@@ -1,1 +1,48 @@
-<p>join works!</p>
+<div class="join-toolbar">
+  <button mat-icon-button aria-label="Back Button" (click)="redirectToHome()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Join Now</span>
+</div>
+@if(!this.registrationSuccess()){
+  <div class="join-header">
+    <p>Join QUACK! today</p>
+  </div>
+  <form class="join-form" [formGroup]="registerForm" (ngSubmit)="registerMember(registerForm)">
+    <mat-form-field>
+      <mat-label>Email Address</mat-label>
+      <input matInput placeholder="Enter Email Address" formControlName="email"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Enter Username" formControlName="username"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hide() ? 'password' : 'text'"
+        placeholder="Enter Password"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="this.hide.set(this.hide())"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="join-button" [class.spinner]="this.loading()" [disabled]="this.loading()">Continue</button>
+    <p class="join-or">Or</p>
+    <a mat-stroked-button class="join-button">Sign Up With Google</a>
+    <p class="join-footer-tnc">By signing up, you agree with Term of service, Privacy policy, including cookie use.</p>
+  </form>
+} @else {
+  <div class="join-registration-success">
+    <p>Congratulation, your account has been successfully created</p>
+    <button mat-raised-button color="primary" class="join-registration-success-button" (click)="redirectToLogin()">Sign In</button>
+  </div>
+}
