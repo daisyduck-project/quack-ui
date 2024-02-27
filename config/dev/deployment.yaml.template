@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-quack
+spec:
+  selector:
+    app: ui-quack
+  ports:
+    - port: 80
+      targetPort: 80
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-quack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-quack
+  template:
+    metadata:
+      labels:
+        app: ui-quack
+    spec:
+      containers:
+        - name: ui-quack
+          image: ui-quack:{{version}}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
