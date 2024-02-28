@@ -1,1 +1,39 @@
-<p>login works!</p>
+<div class="login-toolbar">
+  <button mat-icon-button aria-label="Back Button" (click)="redirectToHome()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Sign In</span>
+</div>
+<div class="login-header">
+  <p>Sign In to your QUACK! account</p>
+</div>
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+  <mat-form-field>
+    <mat-label>Email Address</mat-label>
+    <input matInput placeholder="Enter Email Address" formControlName="email" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="hide() ? 'password' : 'text'"
+      placeholder="Enter Password"
+      formControlName="password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide.set(!hide())"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="login-forgot-password">
+    <a mat-button>Forgot Password?</a>
+  </div>
+  <button mat-raised-button color="primary" class="login-button" [class.spinner]="this.loading()" [disabled]="this.loading()">Sign In</button>
+  <p class="login-or">Or</p>
+  <a mat-stroked-button class="login-button">Login With Google</a>
+</form>

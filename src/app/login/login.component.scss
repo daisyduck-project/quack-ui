@@ -1,0 +1,62 @@
+.login-toolbar {
+  padding: 10px;
+
+  span {
+    vertical-align: super;
+  }
+}
+
+.login-header {
+  font-size: 40px;
+  line-height: 110%;
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-bottom: 50px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.login-form {
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 50px;
+}
+
+.login-forgot-password {
+  text-align: right;
+  margin-bottom: 50px;
+}
+
+.login-button {
+  width: 100% !important;
+  min-width: unset !important;
+}
+
+.login-or {
+  text-align: center;
+  margin-top: 20px;
+}
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}

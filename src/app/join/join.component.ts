@@ -28,14 +28,16 @@ export class JoinComponent {
    }
   redirectToHome() {
     this.router.navigate(['/home']);
-    
+
   }
   redirectToLogin() {
     this.registrationSuccess.set(false);
+    this._snackbar.dismiss();
     this.router.navigate(['/login']);
   }
   registerMember(form: FormGroup) {
     if (form.valid) {
+      this.loading.set(true);
       const md5 = new Md5();
       let newCred: Credentials = {
         email: form.value.email,

@@ -1,23 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Credentials } from './credentials';
 import { environment } from '../../environments/environment';
+import { Posts } from './posts';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MembersService {
+export class MomentsService {
 
   constructor(private http: HttpClient) { }
 
-  registerCredentials(newCred: Credentials){
-    var url = environment.API_URL + '/members/v1/creds';
-    return this.http.post(url, newCred, this.getHeader());
-  }
-
-  login(cred: Credentials){
-    var url = environment.API_URL + '/members/v1/creds/login';
-    return this.http.post(url, cred, this.getHeader());
+  retriveNextMoment(pageNumber: number, pageSize: number): Observable<Posts[]>{
+    var url = environment.API_URL + `/moments/v1/posts?page=${pageNumber}&size=${pageSize}`;
+    return this.http.get<any>(url, this.getHeader()).pipe(
+      map(data => data.content as Posts[])
+    );
   }
 
   getHeader(){

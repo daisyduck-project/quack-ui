@@ -1,0 +1,71 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  $colors: #a2b9bc, #6b5b95, #feb236, #d64161, #ff7b25, #b2ad7f, #878f99;
+  
+  .avatar {
+    color: #fff;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    font-weight: 500;
+    margin-top: -10px;
+  }
+  
+  @for $i from 1 through length($colors) {
+    .avatar:nth-child(#{length($colors)}n+#{$i}) {
+      background: lighten(nth($colors, $i), 20%);
+    }
+  }
+  .example-header-image {
+    color: #fff;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  @for $i from 1 through length($colors) {
+    .example-header-image:nth-child(#{length($colors)}n+#{$i}) {
+      background: lighten(nth($colors, $i), 20%);
+    }
+  }
+  .feed-fab{
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+  }
+  /* The alert message box */
+  .feed-load-error {
+    padding: 20px;
+    background-color: #f44336;
+    /* Red */
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  /* The close button */
+  .feed-load-error-closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .feed-load-error-closebtn:hover {
+    color: black;
+  }
+  
