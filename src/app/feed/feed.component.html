@@ -1,40 +1,36 @@
 <mat-toolbar color="primary">
-    <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-    >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
     <span>Quack!</span>
     <span class="example-spacer"></span>
 </mat-toolbar>
 @if (isError()) {
-    <div class="feed-load-error">
-        <span class="feed-load-error-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        {{this.errorMessage()}}
-    </div>
+<div class="feed-load-error">
+    <span class="feed-load-error-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{this.errorMessage()}}
+</div>
 } @else {
-    <div>
-        @for (item of posts; track item.id) {
-            <ng-container>
-                <mat-card class="example-card">
-                    <mat-card-header>
+@if(posts.length > 0){
+<ul infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMorePosts()">
+    @for (item of posts; track item.id) {
+    <li>
+        <ng-container>
+            <mat-card class="example-card">
+                <mat-card-header>
                     <div mat-card-avatar class="example-header-image">
                         {{ item.userInitial }}
                     </div>
                     <mat-card-title>{{ item.userName }}</mat-card-title>
-                    <mat-card-subtitle
-                        >{{ "@"+item.userCode }} -
-                        {{ item.postingDate | date : "yyyy/MM/dd" }}</mat-card-subtitle
-                    >
-                    </mat-card-header>
-                    <mat-card-content (click)="redirectToDetail()">
+                    <mat-card-subtitle>{{ "@"+item.userCode }} -
+                        {{ item.postingDate | date : "yyyy/MM/dd" }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content (click)="redirectToDetail()">
                     <p>
                         {{ item.postingMessage }}
                     </p>
-                    </mat-card-content>
-                    <mat-card-actions>
+                </mat-card-content>
+                <mat-card-actions>
                     <button mat-button color="primary" (click)="likeThisMoment(item.id!)">
                         <mat-icon>favorite</mat-icon>
                         {{ item.likes }}
@@ -43,9 +39,13 @@
                         <mat-icon>comment</mat-icon>
                         {{ item.replies }}
                     </button>
-                    </mat-card-actions>
-                </mat-card>
-            </ng-container>
-        }
-    </div>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </li>
+    }
+</ul>
+} @else{
+<div>No Post found...</div>
+}
 }
