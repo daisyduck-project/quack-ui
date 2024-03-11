@@ -7,11 +7,7 @@
     "build": "ng build",
     "build-development": "ng build --configuration=development --base-href /web/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "push": "npm version patch && git push",
-    "push-minor": "npm version minor && git push",
-    "push-major": "npm version major && git push",
-    "version": "echo $npm_package_version"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
