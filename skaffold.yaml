@@ -8,7 +8,7 @@ build:
       docker:
         dockerfile: Dockerfile
         buildArgs:
-          PROFILE: development
+          PROFILE: dev
 manifests:
   rawYaml:
     - config/dev/application.deployment.yaml
