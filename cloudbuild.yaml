@@ -4,7 +4,7 @@ steps:
    'build', 
    '--build-arg','PROFILE=staging',
    '-t', 
-   'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',   
+   'gcr.io/daisyduck-reborn/ui-quack:${COMMIT_SHA}',   
    '-t', 
    'gcr.io/daisyduck-reborn/ui-quack:latest',
    '.'
