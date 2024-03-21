@@ -13,12 +13,14 @@ COPY ./ /usr/local/app/
 RUN npm install
 
 ARG PROFILE
-ENV PROFILE "-"$PROFILE
+ENV PROFILE $PROFILE
 
-RUN echo "Environment: ${PROFILE}"
+ENV NODE_ENV=${PROFILE:-PROFILE}
+
+RUN echo "Environment: ${NODE_ENV}"
 
 # Generate the build of the application
-RUN npm run build${PROFILE}
+RUN npm run build${NODE_ENV}
 
 
 # Stage 2: Serve app with nginx server
