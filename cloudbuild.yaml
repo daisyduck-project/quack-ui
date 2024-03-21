@@ -1,0 +1,44 @@
+steps:
+#Install
+- name: 'gcr.io/cloud-builders/npm' 
+  entrypoint: 'npm'
+  args: ['install']
+#Npm Test
+- name: 'gcr.io/cloud-builders/npm' 
+  entrypoint: 'npm'
+  args: ['test']
+#step 2
+- name: gcr.io/cloud-builders/docker
+  args: [
+   'build', 
+   '-t', 
+   'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',
+   '-t', 
+   'gcr.io/daisyduck-reborn/ui:latest',
+   '.'
+  ]
+#step 3
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'config/stag/application.deployment.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
+#step 4
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: [
+   'set', 
+   'image', 
+   'deployment', 
+   'ui', 
+   'ui=gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}'
+  ]
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
+# push images to Google Container Registry with tags
+images: [
+   'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',
+   'gcr.io/daisyduck-reborn/ui:latest'
+  ]
+options:
+  logging: CLOUD_LOGGING_ONLY
