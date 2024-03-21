@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: ui-quack
-          image: gcr.io/daisyduck-reborn/ui-quack
+          image: gcr.io/daisyduck-reborn/ui-quack:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
