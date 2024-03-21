@@ -6,7 +6,7 @@ steps:
    '-t', 
    'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',   
    '-t', 
-   'gcr.io/daisyduck-reborn/ui:latest',
+   'gcr.io/daisyduck-reborn/ui-quack:latest',
    '.'
   ]
 - name: 'gcr.io/cloud-builders/kubectl'
@@ -19,15 +19,15 @@ steps:
    'set', 
    'image', 
    'deployment', 
-   'ui', 
-   'ui=gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}'
+   'ui-quack', 
+   'ui-quack=gcr.io/daisyduck-reborn/ui-quack:${COMMIT_SHA}'
   ]
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
 images: [
-   'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',
-   'gcr.io/daisyduck-reborn/ui:latest'
+   'gcr.io/daisyduck-reborn/ui-quack:${COMMIT_SHA}',
+   'gcr.io/daisyduck-reborn/ui-quack:latest'
   ]
 options:
   logging: CLOUD_LOGGING_ONLY
