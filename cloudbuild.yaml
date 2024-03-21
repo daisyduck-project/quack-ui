@@ -2,9 +2,9 @@ steps:
 - name: gcr.io/cloud-builders/docker
   args: [
    'build', 
+   '--build-arg','PROFILE=staging',
    '-t', 
-   'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',
-   '--build-arg','PROFILE=staging'
+   'gcr.io/daisyduck-reborn/ui:${COMMIT_SHA}',   
    '-t', 
    'gcr.io/daisyduck-reborn/ui:latest',
    '.'
